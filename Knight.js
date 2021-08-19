@@ -27,6 +27,17 @@ const totalNumberOfSquares = 64;
 const BoardLength = 8;
 //use regex to make sure it is a number, no letters and is less than 8
 let regEx = /^[1-8]*$/;
+//added moves equation into a const. the calculating through a for loop.
+const movesEquation = [
+    [1,-2],
+    [2,-1],
+    [2,1],
+    [1,2],
+    [-1,2],
+    [-2,1],
+    [-2,-1],
+    [-1,-2]
+]
 
 
 /*
@@ -65,17 +76,26 @@ function getUserInput(){
 function KnightMovement(x, y){
     //holder for all the new coordinate after the move
     let movement = [];
-    //equations for movement
-    let move1 = [x+1,y-2];
-    let move2 = [x+2,y-1];
-    let move3 = [x+2,y+1];
-    let move4 = [x+1,y+2];
-    let move5 = [x-1,y+2];
-    let move6 = [x-2,y+1];
-    let move7 = [x-2,y-1];
-    let move8 = [x-1,y-2];
-    //store all int the array
-    movement.push(move1,move2,move3,move4,move5,move6,move7,move8);
+
+
+    /*
+        //equations for movement
+        let move1 = [x+1,y-2];
+        let move2 = [x+2,y-1];
+        let move3 = [x+2,y+1];
+        let move4 = [x+1,y+2];
+        let move5 = [x-1,y+2];
+        let move6 = [x-2,y+1];
+        let move7 = [x-2,y-1];
+        let move8 = [x-1,y-2];
+        //store all int the array
+        movement.push(move1,move2,move3,move4,move5,move6,move7,move8);
+        */
+
+    // Better way to do the moves. Make the moves into a constant array and then loop through it.
+    for(let i = 0; i < movesEquation.length;i++){
+        movement.push([(x + movesEquation[i][0]),(y + movesEquation[i][1])]);
+    }
 
     //print out the possible moves that are within the board limits
     var holder = document.getElementById('moves')
