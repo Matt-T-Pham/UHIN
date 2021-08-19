@@ -29,7 +29,7 @@ const totalNumberOfSquares = 64;
 const BoardLength = 8;
 //use regex to make sure it is a number, no letters and is less than 8
 let regEx = /^[1-8]*$/;
-//added moves equation into a const. the calculating through a for loop.
+//added moves equation into a const for the calculating of moves through a for loop.
 const movesEquation = [
     [1,-2],
     [2,-1],
@@ -53,6 +53,7 @@ function getUserInput(){
     let xCoordinate = null;
     let yCoordinate = null;
 
+    //keep requesting until the correct input has been submitted exist when flag is true
     while(!notANumberFlag){
         xCoordinate  = prompt("input an X coordinate");
         yCoordinate = prompt("input an Y coordinate");
@@ -68,6 +69,7 @@ function getUserInput(){
     x = parseInt(xCoordinate);
     y = parseInt(yCoordinate);
 
+    //display for user
     document.getElementById('xCoordinates').innerHTML ="The X coordinate you have selected is: " + x;
     document.getElementById('yCoordinates').innerHTML ="The Y coordinate you have selected is: " + y;
 }
@@ -79,8 +81,9 @@ function getUserInput(){
     Then display coordinates of legal moves.
  */
 function KnightMovement(x, y){
-    //holder for all the new coordinate after the move
+
     //moving outside to match other vairables
+    //holder for all the new coordinate after the move
     //let movement = [];
 
     /*
@@ -115,23 +118,25 @@ function KnightMovement(x, y){
 }
 /*
     helper function to display board.
-
     bottom left is 1,1 coordiante
-
  */
 function displayBoard() {
 
+    // doing it this way because the bottom left is 1,1 therefore have to do things in reverse
+    //knight starting position
     board[y-1][x-1] = '[K]';
 
+    //adding possible moves to the board
     for (let i = 0; i < movement.length;i++){
         board[movement[i][1] - 1 ][movement[i][0] - 1] = "[X]";
     }
-        //print out the possible moves that are within the board limits
-        let holder = document.getElementById('board');
 
-        for(let i = board.length-1; i >= 0; i--){
-                holder.innerHTML +=  "<p>" + board[i] + "</p>";
-        }
+    //print out the possible moves that are within the board limits
+    let holder = document.getElementById('board');
+
+    for(let i = board.length-1; i >= 0; i--){
+            holder.innerHTML +=  "<p>" + board[i] + "</p>";
+    }
 }
 
 //calling the functions
