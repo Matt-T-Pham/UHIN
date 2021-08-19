@@ -13,6 +13,8 @@ and over one square horizontally.
 For example if we have a knightnamed 'k' highligted in red  at [3,3] it is the best case scnerio that the knight can move 8 spaces denoted by the green highligting.
 The way to calculate each transformation is denoted on the right with the corresponding number. 
 
+I decided to do a visual representation in a simple ASCII way to better show where a knight can move. K will be the knight and the X are the possible moves. Since this is a javascript assignment I did it in javascript and used HTML only as a way to start the javascript. 
+
 ![alt text](https://github.com/Matt-T-Pham/UHIN/blob/main/images/KightMovement.png?raw=true)
 
 # Usage
