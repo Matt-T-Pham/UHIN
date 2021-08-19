@@ -11,6 +11,8 @@
 
         all chess boards start at 1,1
 
+        Bottom left hand corner is 1,1
+
         coordinate 1,1 is the lower left hand corner of the chessboard on the white side
 
         knight moves in an L
@@ -37,7 +39,10 @@ const movesEquation = [
     [-2,1],
     [-2,-1],
     [-1,-2]
-]
+];
+let movement = [];
+let board = new Array(BoardLength).fill('[_]').map(() => new Array(BoardLength).fill('[_]'));
+
 
 
 /*
@@ -75,8 +80,8 @@ function getUserInput(){
  */
 function KnightMovement(x, y){
     //holder for all the new coordinate after the move
-    let movement = [];
-
+    //moving outside to match other vairables
+    //let movement = [];
 
     /*
         //equations for movement
@@ -93,18 +98,43 @@ function KnightMovement(x, y){
         */
 
     // Better way to do the moves. Make the moves into a constant array and then loop through it.
+    // make check her to make sure moves are legal
     for(let i = 0; i < movesEquation.length;i++){
-        movement.push([(x + movesEquation[i][0]),(y + movesEquation[i][1])]);
+        let tempx = x + movesEquation[i][0];
+        let tempy = y + movesEquation[i][1];
+        if(tempx <= BoardLength && tempx >= 1 && tempy<= BoardLength && tempy >= 1)
+        movement.push([tempx,tempy]);
     }
 
-    //print out the possible moves that are within the board limits
-    var holder = document.getElementById('moves')
+    //print out the possible moves
+    let holder = document.getElementById('moves')
     for(let i = 0; i < movement.length; i++){
-        if(movement[i][0] <= BoardLength && movement[i][0] >= 1 && movement[i][1] <= BoardLength && movement[i][1] >= 1)
         holder.innerHTML +=  "<p>" + movement[i] + "</p>";
     }
+
+}
+/*
+    helper function to display board.
+
+    bottom left is 1,1 coordiante
+
+ */
+function displayBoard() {
+
+    board[y-1][x-1] = '[K]';
+
+    for (let i = 0; i < movement.length;i++){
+        board[movement[i][1] - 1 ][movement[i][0] - 1] = "[X]";
+    }
+        //print out the possible moves that are within the board limits
+        let holder = document.getElementById('board');
+
+        for(let i = board.length-1; i >= 0; i--){
+                holder.innerHTML +=  "<p>" + board[i] + "</p>";
+        }
 }
 
 //calling the functions
 getUserInput();
 KnightMovement(x, y);
+displayBoard();
